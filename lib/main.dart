@@ -1,12 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+
   runApp(
     EasyLocalization(
-      supportedLocales: const [Locale('en'), Locale('hi'), Locale('pa')],
+      supportedLocales: const [Locale('en', 'US'), Locale('hi'), Locale('pa')],
       path: 'assets/translations',
-      fallbackLocale: const Locale('en'),
+      fallbackLocale: const Locale('en', 'US'),
       child: MyApp(),
     ),
   );
@@ -56,13 +59,13 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    context.locale = Locale('en');
+                    context.locale = Locale('en', 'US');
                   },
                   child: Text('English'),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    context.locale = Locale(('pa'));
+                    context.setLocale(Locale('pa'));
                   },
                   child: Text('Punjabi '),
                 ),
